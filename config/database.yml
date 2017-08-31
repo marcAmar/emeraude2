@@ -15,10 +15,10 @@
 development:
   adapter:  postgresql
   host:     localhost
-  encoding: unicode
+  encoding: utf-8
   database: emeraude2_development
   pool:     5
-  username: emeraude2
+  username:
   password:
   template: template0
 
@@ -43,19 +43,19 @@ development:
 test:
   adapter:  postgresql
   host:     localhost
-  encoding: unicode
+  encoding: utf-8
   database: emeraude2_test
   pool:     5
-  username: emeraude2
+  username:
   password:
   template: template0
 
 production:
   adapter:  postgresql
   host:     localhost
-  encoding: unicode
+  encoding: utf-8
   database: emeraude2_production
   pool:     5
-  username: emeraude2
+  username: 
   password:
   template: template0

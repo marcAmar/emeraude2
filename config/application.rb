@@ -20,6 +20,7 @@ module Emeraude2
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
 
+    config.i18n.available_locales = [:en, :fr]
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 

@@ -1,0 +1,45 @@
+
+
+
+
+
+
+
+  <div class="authform">
+      <table class="table" >
+
+
+
+                    <%= form_for(user) do |f| %>
+          <div class="form-group" >
+            <tr>
+                    <td>
+                       <%= user.email if user.email %>
+                      <%= user.buildings.map(&:name) if user.buildings %>
+
+                    </td>
+
+                    <td>
+                        <%= f.label 'Role' %>
+                        <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]},{:prompt => 'Select'},{:class => 'form-control'}) %>
+                    </td>
+
+                    <td>
+
+                        <%= f.label 'Building' %>
+                        <%= collection_select(:building_id, :building_id, Building.all, :id, :name,
+                                  {:prompt => 'Select'},{:class => 'form-control'})%>
+                    </td>
+              </tr>
+                <tr>
+                    <td><%= f.submit 'Update', :class => 'btn btn-primary' %></td>
+                    <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger') %></td>
+                    <td><%= link_to("User", user_path(user)) %></td>
+              </tr>
+
+
+             <% end %>
+        </div>
+               </table>
+
+  </div>

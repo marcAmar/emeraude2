@@ -1,0 +1,32 @@
+<h3> Gestion des immeubles</h3>
+
+<table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @buildings.each do |building| %>
+
+            <%= form_for(building) do |f| %>
+              <tr>
+                <td><%= building.id if building.id %></td>
+                <td><%= building.name if building.name %></td>
+                <td><%= building.description if building.description%></td>
+                <td>
+                <%= link_to("Delete building", building_path(building), :data => { :confirm => "Are you sure?" },
+                          :method => :delete, :class => 'btn btn-danger btn-sm') %>
+                        <%= link_to("Building", building_path(building)) %></td>
+
+              </tr>
+
+            <% end %>
+          <% end %>
+
+        </tbody>
+
+  </table>

@@ -1,16 +1,39 @@
-<div class="container">
-  <div class="row">
-    <h3>Users</h3>
-    <div class="column">
-      <table class="table">
+
+<h3> Gestion des users</h3>
+
+<table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>nom</th>
+                <th>email</th>
+                <th>Building</th>
+                <th>Role</th>
+                <th>Change Building</th>
+                <th>application</th>
+            </tr>
+        </thead>
         <tbody>
           <% @users.each do |user| %>
-            <tr>
-              <%= render user %>
-            </tr>
+
+            <%= form_for(user) do |f| %>
+              <tr>
+                <td><%= user.name if user.name %></td>
+                <td><%= user.email if user.email %></td>
+                <td><%=user.buildings.map(&:name).flatten.join(' ')  if user.buildings%></td>
+                <td><%=f.select(:role, User.roles.keys.map {|role| [role.titleize,role]},{:prompt => 'Select'},
+                  {:class => 'form-control'}) %></td>
+                <td><%= collection_select(:building_id, :building_id, Building.all, :id, :name,
+                          {:prompt => 'Select'},{:class => 'form-control'})%></td>
+                <td><%= f.submit 'Update', :class => 'btn btn-primary btn-sm' %>
+                <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" },
+                          :method => :delete, :class => 'btn btn-danger btn-sm') %>
+                        <%= link_to("User", user_path(user)) %></td>
+
+              </tr>
+
+            <% end %>
           <% end %>
+
         </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+
+  </table>
