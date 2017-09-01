@@ -16,7 +16,7 @@ source 'https://rubygems.org'
 gem 'nokogiri'
 gem 'rack', '~> 2.0.1'
 gem 'rspec'
-
+gem 'rails_12factor'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
