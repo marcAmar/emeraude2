@@ -1,0 +1,15 @@
+<div class="authform">
+  <%= form_for @building do |f| %>
+    <h3>Edit building</h3>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_field :description, class: 'form-control' %>
+    </div>
+
+     <%= f.submit 'update', :class => 'button right' %>
+  <% end %>
+</div>

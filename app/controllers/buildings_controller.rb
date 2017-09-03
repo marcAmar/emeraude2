@@ -1,29 +1,69 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
-  after_action :verify_authorized
+  #after_action :verify_authorized
 
   def index
-    @buildings = Building.order('buildings.id asc').all
 
     authorize User
+
+    @building = Building.order('buildings.id asc').all
+
+
   end
 
   def show
-    @buildings = Building.find(params[:id])
 
-    authorize User
+  @building = Building.find(params[:id])
+
+    authorize Building
 
   end
 
-  def update
-      @building = Building.find(params[:id])
 
-    authorize @user
+  def new
+
+
+    @building = Building.new
+
+  end
+
+  def edit
+    @building = Building.find(params[:id])
+    authorize Building
+
+  end
+
+
+  def create
+
+
+    authorize Building
+
+    @building = Building.new(secure_params)
+    logger.debug "@toto is: #{@building}"
+
+
+    if @building.save
+
+        redirect_to new_building_path, success: 'Building as been created'
+    else
+        redirect_to buildings_path
+
+    end
+
+  end
+
+
+
+  def update
+
+    @building = Building.find(params[:id])
+
+    authorize Building
+
 
     #@user.building_ids = params[:building_id]
     logger.debug "@toto is: #{@toto}"
-
-
 
 
     if @building.update_attributes(secure_params)
@@ -31,30 +71,31 @@ class BuildingsController < ApplicationController
       redirect_to buildings_path, :notice => "Building updated ."
     else
       redirect_to buildings_path, :alert => "Unable to update Building."
-    end
+   end
   end
 
   def destroy
     building = Building.find(params[:id])
-    authorize user
+    authorize Building
     building.destroy
     redirect_to buildings_path, :notice => "Building deleted."
 
   end
 
 
-
   private
 
   def secure_params
-    params.require(:user).permit(:role)
+    params.require(:building).permit(:name, :description)
 
   end
 
-  def secure_params_building
-    params.require(:building).permit(:id, :name, :description)
 
-  end
+
+
+
+
+
 
 
 end

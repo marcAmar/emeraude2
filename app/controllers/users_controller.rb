@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.includes(:buildings).order('buildings.id asc').all
-
+ 
     authorize User
   end
 
